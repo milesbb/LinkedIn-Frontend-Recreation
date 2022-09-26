@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getProfile } from "../redux/actions/getProfileInfo";
+import Bio from "./Bio";
 import Loading from "./Loading";
 import Warning from "./Warning";
 
@@ -43,16 +44,16 @@ const ProfilePage = () => {
     <div>
       {loading && <Loading />}
 
-      {!loading && (errorOccurred || currentUser === null) && <Warning />}
+      {!loading && (errorOccurred || currentUser === null) && <Warning variant="danger" message="There was an error loading this content" />}
 
       {!loading && !(errorOccurred || currentUser === null) && ( isOnMyProfile?
         <div>
-          <h1>{currentUser.name + " " + currentUser.surname}</h1>
+          <Bio isOnMyProfile={isOnMyProfile} profileData={currentUser} />
           <Link to={"/profiles/" + "5fc4ae95b708c200175de88d"}>test</Link>
         </div> 
         : 
         <div>
-          <h1>{profile.name + " " + profile.surname}</h1>
+          <Bio isOnMyProfile={isOnMyProfile} profileData={profile} />
           <Link to={"/"}>test</Link>
         </div> 
       )}

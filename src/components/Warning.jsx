@@ -1,8 +1,8 @@
 import { Alert } from "react-bootstrap";
 
-const Warning = () => {
+const Warning = ({variant, message}) => {
   return (
-    <Alert variant="danger">There was an error loading this content</Alert>
+    <Alert variant={variant}>{message}</Alert>
   );
 };
 
