@@ -2,10 +2,11 @@ export const GET_PROFILE_INFO = "GET_PROFILE_INFO";
 export const GET_PROFILE_INFO_ERROR = "GET_PROFILE_INFO_ERROR";
 export const GET_PROFILE_INFO_LOADING = "GET_PROFILE_INFO_LOADING";
 export const GET_PROFILES_LIST = "GET_PROFILES_LIST";
+export const GET_CURRENT_USER = "GET_CURRENT_USER";
 
 // if userId =
 // "" then returns list of profiles to 'profilesList'
-// "me" then returns our profile to 'profile'
+// "me" then returns our profile to 'currentUser'
 // a user ID as string then returns profile of specific user Id to 'profile'
 
 export const getProfile = (userId) => {
@@ -17,7 +18,12 @@ export const getProfile = (userId) => {
       });
 
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/" + userId
+        "https://striveschool-api.herokuapp.com/api/profile/" + userId,
+        {
+            headers: {
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzMxNjQzOTc2NTM5YzAwMTViNWNkNjkiLCJpYXQiOjE2NjQxODEzMDUsImV4cCI6MTY2NTM5MDkwNX0.KhUolJNoXb0Qw4Ddn9_bNvXY60qoqEiyqDK01VX9OE8'
+            }
+        }
       );
 
       if (response.ok) {
@@ -25,6 +31,11 @@ export const getProfile = (userId) => {
         if (userId === "") {
           dispatch({
             type: GET_PROFILES_LIST,
+            payload: profile,
+          });
+        } else if (userId === "me") {
+          dispatch({
+            type: GET_CURRENT_USER,
             payload: profile,
           });
         } else {
