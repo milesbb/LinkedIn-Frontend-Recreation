@@ -8,6 +8,7 @@ import {
 
 const initialState = {
   currentUser: null,
+  isOnMyProfile: true,
   profile: null,
   profilesList: [],
   errorProfile: false,
@@ -20,11 +21,13 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: action.payload,
+        isOnMyProfile: true,
       };
     case GET_PROFILE_INFO:
       return {
         ...state,
         profile: action.payload,
+        isOnMyProfile: false,
       };
 
     case GET_PROFILES_LIST:

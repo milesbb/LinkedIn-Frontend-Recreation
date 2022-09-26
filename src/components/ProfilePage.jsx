@@ -1,13 +1,21 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { getProfile } from "../redux/actions/getProfileInfo";
 import Loading from "./Loading";
 import Warning from "./Warning";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
+
   const currentUser = useSelector((state) => {
     return state.loadedProfiles.currentUser;
+  });
+  const profile = useSelector((state) => {
+    return state.loadedProfiles.profile;
+  });
+  const isOnMyProfile = useSelector((state) => {
+    return state.loadedProfiles.isOnMyProfile;
   });
   const loading = useSelector((state) => {
     return state.loadedProfiles.loadingProfile;
@@ -15,10 +23,21 @@ const ProfilePage = () => {
   const errorOccurred = useSelector((state) => {
     return state.loadedProfiles.errorProfile;
   });
-  console.log(currentUser);
+
+  const params = useParams();
+
+  
+  console.log(params.userId)
+
   useEffect(() => {
-    dispatch(getProfile("me"));
-  }, []);
+    if (params.userId === undefined) {
+      dispatch(getProfile("me"));
+      console.log(currentUser);
+    } else {
+      dispatch(getProfile(params.userId));
+      console.log(profile)
+    }
+  }, [params.userId]);
 
   return (
     <div>
@@ -26,8 +45,16 @@ const ProfilePage = () => {
 
       {!loading && (errorOccurred || currentUser === null) && <Warning />}
 
-      {!loading && !(errorOccurred || currentUser === null) && (
-        <h1>{currentUser.name + " " + currentUser.surname}</h1>
+      {!loading && !(errorOccurred || currentUser === null) && ( isOnMyProfile?
+        <div>
+          <h1>{currentUser.name + " " + currentUser.surname}</h1>
+          <Link to={"/profiles/" + "5fc4ae95b708c200175de88d"}>test</Link>
+        </div> 
+        : 
+        <div>
+          <h1>{profile.name + " " + profile.surname}</h1>
+          <Link to={"/"}>test</Link>
+        </div> 
       )}
     </div>
   );

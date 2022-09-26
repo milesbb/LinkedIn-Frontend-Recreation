@@ -10,6 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ProfilePage />} />
+          <Route path="/profiles/:userId" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </div>
