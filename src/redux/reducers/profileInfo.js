@@ -23,6 +23,7 @@ const profileReducer = (state = initialState, action) => {
         currentUser: action.payload,
         isOnMyProfile: true,
       };
+
     case GET_PROFILE_INFO:
       return {
         ...state,
@@ -47,6 +48,7 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         loadingProfile: action.payload,
       };
+      
     default:
       return state;
   }

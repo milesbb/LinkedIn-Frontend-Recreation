@@ -67,7 +67,7 @@ const Bio = ({ profileData, isOnMyProfile }) => {
         borderRadius: "10px",
         background: "white",
         width: "60vw",
-        height: "50vh",
+        
       }}
       className="ml-5 mt-5 text-left position-relative"
     >
@@ -90,7 +90,7 @@ const Bio = ({ profileData, isOnMyProfile }) => {
           height: "25vh",
           borderRadius: "10px 10px 0 0",
         }}
-        className="w-100"
+        className="w-100 mb-5"
       ></div>
       <div className="mt-5 ml-5 d-flex w-75">
         <div className="mr-auto">
