@@ -1,9 +1,11 @@
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getProfile } from "../redux/actions/getProfileInfo";
 import Bio from "./Bio";
 import Loading from "./Loading";
+import SideProfiles from "./SideProfiles";
 import Warning from "./Warning";
 
 const ProfilePage = () => {
@@ -50,6 +52,7 @@ const ProfilePage = () => {
         <div>
           <Bio isOnMyProfile={isOnMyProfile} profileData={currentUser} />
           <Link to={"/profiles/" + "5fc4ae95b708c200175de88d"}>test</Link>
+          <SideProfiles/>
         </div> 
         : 
         <div>
