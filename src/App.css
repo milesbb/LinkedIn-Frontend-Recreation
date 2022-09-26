@@ -36,27 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-
-.profiles-container{
-  height: 500px;
-  width: 300px;
-  font-size: medium;
-  
-}
-
-.jobTitle p{
-  color: gray;
-}
-
-.jobTitle strong{
-  color: black;
-}
-.title{
-  font-size:x-large;
-}
-.jobTitle{
-  width: 300px;
-
-}
-

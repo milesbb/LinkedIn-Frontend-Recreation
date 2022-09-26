@@ -66,10 +66,9 @@ const Bio = ({ profileData, isOnMyProfile }) => {
       style={{
         borderRadius: "10px",
         background: "white",
-        width: "60vw",
         
       }}
-      className="ml-5 mt-5 text-left position-relative"
+      className="mt-5 text-left position-relative"
     >
       <Image
         className="position-absolute"

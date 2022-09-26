@@ -1,5 +1,5 @@
-
 import { useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getProfile } from "../redux/actions/getProfileInfo";
@@ -29,8 +29,9 @@ const ProfilePage = () => {
 
   const params = useParams();
 
-  
-  console.log(params.userId)
+  console.log(params.userId);
+
+  //   test /profiles/5fc4ae95b708c200175de88d
 
   useEffect(() => {
     if (params.userId === undefined) {
@@ -38,7 +39,7 @@ const ProfilePage = () => {
       console.log(currentUser);
     } else {
       dispatch(getProfile(params.userId));
-      console.log(profile)
+      console.log(profile);
     }
   }, [params.userId]);
 
@@ -46,19 +47,27 @@ const ProfilePage = () => {
     <div>
       {loading && <Loading />}
 
-      {!loading && (errorOccurred || currentUser === null) && <Warning variant="danger" message="There was an error loading this content" />}
+      {!loading && (errorOccurred || currentUser === null) && (
+        <Warning
+          variant="danger"
+          message="There was an error loading this content"
+        />
+      )}
 
-      {!loading && !(errorOccurred || currentUser === null) && ( isOnMyProfile?
-        <div>
-          <Bio isOnMyProfile={isOnMyProfile} profileData={currentUser} />
-          <Link to={"/profiles/" + "5fc4ae95b708c200175de88d"}>test</Link>
-          <SideProfiles/>
-        </div> 
-        : 
-        <div>
-          <Bio isOnMyProfile={isOnMyProfile} profileData={profile} />
-          <Link to={"/"}>test</Link>
-        </div> 
+      {!loading && !(errorOccurred || currentUser === null) && (
+        <Container>
+          <Row>
+            <Col sm={12} md={8} lg={9}>
+              <Bio
+                isOnMyProfile={isOnMyProfile}
+                profileData={isOnMyProfile ? currentUser : profile}
+              />
+            </Col>
+            <Col sm={12} md={4} lg={3}>
+              <SideProfiles />
+            </Col>
+          </Row>
+        </Container>
       )}
     </div>
   );
