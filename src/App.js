@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { BrowserRouter, Route, Router } from "react-router-dom";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import ProfilePage from "./components/ProfilePage";
 
 function App() {
@@ -8,9 +8,9 @@ function App() {
     <div className="App">
       {/* PUT NAVBAR HERE */}
       <BrowserRouter>
-        <Router>
+        <Routes>
           <Route path="/" element={<ProfilePage />} />
-        </Router>
+        </Routes>
       </BrowserRouter>
     </div>
   );
