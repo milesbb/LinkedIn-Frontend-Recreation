@@ -1,10 +1,10 @@
+import LZString from "lz-string";
 import { useState } from "react";
-import { Button, Form, Image, Modal } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changeProfile } from "../redux/actions/changeProfile";
 import { getProfile } from "../redux/actions/getProfileInfo";
-import Loading from "./Loading";
-import Warning from "./Warning";
+import EditButton from "./EditButton";
 
 const Bio = ({ profileData, isOnMyProfile }) => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const Bio = ({ profileData, isOnMyProfile }) => {
   const [surname, setSurname] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [location, setLocation] = useState("");
+  const [image, setImage] = useState("");
 
   const editErrorOccurred = useSelector((state) => {
     return state.editProfile.profileChangeError;
@@ -43,18 +44,31 @@ const Bio = ({ profileData, isOnMyProfile }) => {
     setLocation(e.target.value);
   };
 
+  const handleChangeImage = (value) => {
+    console.log(value);
+    setImage(value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const nameForEdit = name ? name : profileData.name;
     const surnameForEdit = surname ? surname : profileData.surname;
     const jobTitleForEdit = jobTitle ? jobTitle : profileData.jobTitle;
     const locationForEdit = location ? location : profileData.area;
+    const imageForEdit = image ? image : profileData.image;
+
+    console.log(imageForEdit);
+
+    // const compressed = await Base64String.compress(imageForEdit)
+    // console.log("Compressed String" + compressed)
 
     const editData = {
       name: nameForEdit,
       surname: surnameForEdit,
       title: jobTitleForEdit,
       area: locationForEdit,
+      image: imageForEdit,
     };
     dispatch(changeProfile(editData));
 
@@ -66,7 +80,6 @@ const Bio = ({ profileData, isOnMyProfile }) => {
       style={{
         borderRadius: "10px",
         background: "white",
-        
       }}
       className="mt-5 text-left position-relative"
     >
@@ -97,69 +110,25 @@ const Bio = ({ profileData, isOnMyProfile }) => {
           <h3>{profileData.title}</h3>
           <p>{profileData.area}</p>
         </div>
-        {isOnMyProfile && <div>
-          <Button
-            style={{ background: "none", color: "black", border: "none" }}
-            onClick={handleShow}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
-              fill="currentColor"
-              className="bi bi-pencil"
-              viewBox="0 0 16 16"
-            >
-              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-            </svg>
-          </Button>
-
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Info</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form className="w-75">
-                <p>Name</p>
-                <Form.Control
-                  type="search"
-                  value={name}
-                  onChange={handleChangeName}
-                  placeholder={profileData.name}
-                />
-                <p className="mt-3">Surname</p>
-                <Form.Control
-                  type="search"
-                  value={surname}
-                  onChange={handleChangeSurname}
-                  placeholder={profileData.surname}
-                />
-                <p className="mt-3">Job Title</p>
-                <Form.Control
-                  type="search"
-                  value={jobTitle}
-                  onChange={handleChangeJobTitle}
-                  placeholder={profileData.title}
-                />
-                <p className="mt-3">Location</p>
-                <Form.Control
-                  type="search"
-                  value={location}
-                  onChange={handleChangeLocation}
-                  placeholder={profileData.area}
-                />
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={handleSubmit}>
-                    Save Changes
-                  </Button>
-                </Modal.Footer>
-              </Form>
-            </Modal.Body>
-          </Modal>
-        </div>}
+        {isOnMyProfile && (
+          <EditButton
+            show={show}
+            handleShow={handleShow}
+            profileData={profileData}
+            handleClose={handleClose}
+            handleSubmit={handleSubmit}
+            handleChangeName={handleChangeName}
+            handleChangeSurname={handleChangeSurname}
+            handleChangeJobTitle={handleChangeJobTitle}
+            handleChangeLocation={handleChangeLocation}
+            handleChangeImage={handleChangeImage}
+            name={name}
+            surname={surname}
+            jobTitle={jobTitle}
+            location={location}
+            image={image}
+          />
+        )}
       </div>
       {/* {editLoading && <Loading className="fixed-bottom" />}
           {!editLoading && editErrorOccurred && (
