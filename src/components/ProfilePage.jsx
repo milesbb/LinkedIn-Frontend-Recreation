@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { getExperiences } from "../redux/actions/getExperiences";
 import { getProfile, ON_MY_PROFILE } from "../redux/actions/getProfileInfo";
 import Bio from "./Bio";
+
 import ExperiencesSection from "./ExperiencesSection";
 import Loading from "./Loading";
 import SideProfiles from "./SideProfiles";
