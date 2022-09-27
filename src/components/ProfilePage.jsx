@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getProfile, ON_MY_PROFILE } from "../redux/actions/getProfileInfo";
 import Bio from "./Bio";
+import ExperienceSection from "./ExperienceSection";
 import Loading from "./Loading";
 import SideProfiles from "./SideProfiles";
 import Warning from "./Warning";
@@ -82,6 +83,7 @@ const ProfilePage = () => {
                 profileData={isOnMyProfile ? currentUser : profile}
               />
               <Link to="/">back to currentuser</Link>
+              <ExperienceSection/>
             </Col>
             <Col sm={12} md={4} lg={3}>
               <SideProfiles />
