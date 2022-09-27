@@ -3,6 +3,7 @@ export const GET_PROFILE_INFO_ERROR = "GET_PROFILE_INFO_ERROR";
 export const GET_PROFILE_INFO_LOADING = "GET_PROFILE_INFO_LOADING";
 export const GET_PROFILES_LIST = "GET_PROFILES_LIST";
 export const GET_CURRENT_USER = "GET_CURRENT_USER";
+export const ON_MY_PROFILE = "ON_MY_PROFILE"
 
 // if userId =
 // "" then returns list of profiles to 'profilesList'

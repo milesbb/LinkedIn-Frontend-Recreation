@@ -16,8 +16,6 @@ const SideProfiles = () => {
     }
   }, []);
 
-  console.log(profilesList);
-
   return (
     <div className="p-2 mt-5" style={{background: "white", borderRadius: "10px"}}>
       <h2 className="text-left ml-2" style={{fontSize: "1.3rem"}}>People also viewed</h2>

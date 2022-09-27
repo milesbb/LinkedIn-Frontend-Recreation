@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getProfile } from "../redux/actions/getProfileInfo";
+import { getProfile, ON_MY_PROFILE } from "../redux/actions/getProfileInfo";
 import Bio from "./Bio";
 import Loading from "./Loading";
 import SideProfiles from "./SideProfiles";
 import Warning from "./Warning";
+
+//   test /profiles/5fc4ae95b708c200175de88d
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -29,18 +31,35 @@ const ProfilePage = () => {
 
   const params = useParams();
 
-  console.log(params.userId);
+  const getData = async () => {
+    await dispatch(getProfile("me"));
+    console.log("current user", currentUser);
+  };
 
-  //   test /profiles/5fc4ae95b708c200175de88d
+  const getOtherProfileData = async () => {
+    if (currentUser !== null) {
+      if (params.userId !== undefined && params.userId !== currentUser._id) {
+        await dispatch(getProfile(params.userId));
+        console.log(profile);
+        dispatch({type: ON_MY_PROFILE, payload: false})
+      } else {
+        dispatch({type: ON_MY_PROFILE, payload: true})
+      }
+    }
+  };
 
   useEffect(() => {
-    if (params.userId === undefined) {
-      dispatch(getProfile("me"));
-      console.log(currentUser);
-    } else {
-      dispatch(getProfile(params.userId));
-      console.log(profile);
+    getData();
+  }, []);
+
+  useEffect(() => {
+    if (loading) {
+      getData();
     }
+  }, [loading]);
+
+  useEffect(() => {
+    getOtherProfileData();
   }, [params.userId]);
 
   return (
@@ -62,6 +81,7 @@ const ProfilePage = () => {
                 isOnMyProfile={isOnMyProfile}
                 profileData={isOnMyProfile ? currentUser : profile}
               />
+              <Link to="/">back to currentuser</Link>
             </Col>
             <Col sm={12} md={4} lg={3}>
               <SideProfiles />
