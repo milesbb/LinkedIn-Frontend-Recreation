@@ -69,6 +69,16 @@ const ProfilePage = () => {
     getOtherProfileData();
   }, [params.userId]);
 
+  useEffect(() => {
+    if (profile !== null) {
+      if (params.userId !== undefined) {
+        if (params.userId !== profile._id) {
+          getOtherProfileData();
+        }
+      }
+    }
+  });
+
   return (
     <div>
       {loading && <Loading />}
