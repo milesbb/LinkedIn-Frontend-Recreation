@@ -20,13 +20,15 @@ const experienceHandleReducer = (state = initialState, action) => {
     case HANDLE_EXPERIENCE_ERROR:
       return {
         ...state,
-        handleExpError: action.payload,
+        handleExpError: true,
       };
     case HANDLE_EXPERIENCE_LOADING:
       return {
         ...state,
         handleExpLoading: action.payload,
       };
+      default:
+      return state;
   }
 };
 

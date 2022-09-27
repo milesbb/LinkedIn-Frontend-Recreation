@@ -1,4 +1,9 @@
-import { GET_EXPERIENCES, GET_EXPERIENCES_ERROR, GET_EXPERIENCES_LOADING, GET_SPECIFIC_EXPERIENCE } from "../actions/getExperiences";
+import {
+  GET_EXPERIENCES,
+  GET_EXPERIENCES_ERROR,
+  GET_EXPERIENCES_LOADING,
+  GET_SPECIFIC_EXPERIENCE,
+} from "../actions/getExperiences";
 
 const initialState = {
   experiences: [],
@@ -27,9 +32,11 @@ const experiencesReducer = (state = initialState, action) => {
     case GET_EXPERIENCES_ERROR:
       return {
         ...state,
-        experiencesError: action.payload,
+        experiencesError: true,
       };
+    default:
+      return state;
   }
 };
 
-export default experiencesReducer
+export default experiencesReducer;

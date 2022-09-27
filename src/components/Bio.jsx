@@ -7,6 +7,7 @@ import { getProfile } from "../redux/actions/getProfileInfo";
 import EditButton from "./EditButton";
 
 const Bio = ({ profileData, isOnMyProfile }) => {
+    console.log("current user", profileData);
   return (
     <div
       style={{

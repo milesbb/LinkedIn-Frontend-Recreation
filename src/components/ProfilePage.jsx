@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { getExperiences } from "../redux/actions/getExperiences";
 import { getProfile, ON_MY_PROFILE } from "../redux/actions/getProfileInfo";
 import Bio from "./Bio";
+import ExperiencesSection from "./ExperiencesSection";
 import Loading from "./Loading";
 import SideProfiles from "./SideProfiles";
 import Warning from "./Warning";
@@ -31,30 +33,28 @@ const ProfilePage = () => {
 
   const params = useParams();
 
-  const getData = async () => {
+  const getMyData = async () => {
     await dispatch(getProfile("me"));
-    console.log("current user", currentUser);
   };
 
   const getOtherProfileData = async () => {
     if (currentUser !== null) {
       if (params.userId !== undefined && params.userId !== currentUser._id) {
         await dispatch(getProfile(params.userId));
-        console.log(profile);
-        dispatch({type: ON_MY_PROFILE, payload: false})
+        dispatch({ type: ON_MY_PROFILE, payload: false });
       } else {
-        dispatch({type: ON_MY_PROFILE, payload: true})
+        dispatch({ type: ON_MY_PROFILE, payload: true });
       }
     }
   };
 
   useEffect(() => {
-    getData();
+    getMyData();
   }, []);
 
   useEffect(() => {
     if (loading) {
-      getData();
+      getMyData();
     }
   }, [loading]);
 
@@ -82,6 +82,7 @@ const ProfilePage = () => {
                 profileData={isOnMyProfile ? currentUser : profile}
               />
               <Link to="/">back to currentuser</Link>
+              {(profile || currentUser) && <ExperiencesSection userId={isOnMyProfile ? currentUser._id : profile._id} />}
             </Col>
             <Col sm={12} md={4} lg={3}>
               <SideProfiles />

@@ -1,7 +1,7 @@
-export const GET_EXPERIENCES = "GET_PROFILE_INFO";
-export const GET_EXPERIENCES_ERROR = "GET_PROFILE_INFO_ERROR";
-export const GET_EXPERIENCES_LOADING = "GET_PROFILE_INFO_LOADING";
-export const GET_SPECIFIC_EXPERIENCE = "GET_PROFILES_LIST";
+export const GET_EXPERIENCES = "GET_EXPERIENCES";
+export const GET_EXPERIENCES_ERROR = "GET_EXPERIENCES_ERROR";
+export const GET_EXPERIENCES_LOADING = "GET_EXPERIENCES_LOADING";
+export const GET_SPECIFIC_EXPERIENCE = "GET_SPECIFIC_EXPERIENCE";
 
 // userId mandatory
 
@@ -21,7 +21,7 @@ export const getExperiences = (userId, experienceId) => {
       if (experienceId !== "") {
         fetchURL = fetchURL + experienceId;
       }
-
+      console.log(fetchURL)
       let response = await fetch(
         fetchURL,
         {
