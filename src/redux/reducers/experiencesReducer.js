@@ -32,7 +32,7 @@ const experiencesReducer = (state = initialState, action) => {
     case GET_EXPERIENCES_ERROR:
       return {
         ...state,
-        experiencesError: true,
+        experiencesError: action.payload,
       };
     default:
       return state;

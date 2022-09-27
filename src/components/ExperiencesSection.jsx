@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { getExperiences } from "../redux/actions/getExperiences";
 import AddButton from "./AddButton";
 import ExperienceItem from "./ExperienceItem";
+import Loading from "./Loading";
+import Warning from "./Warning";
 
 const ExperiencesSection = ({ userId }) => {
   const params = useParams();
@@ -23,6 +25,9 @@ const ExperiencesSection = ({ userId }) => {
   });
   const experiencesLoading = useSelector((state) => {
     return state.loadedExperiences.experiencesLoading;
+  });
+  const experiencesError = useSelector((state) => {
+    return state.loadedExperiences.experiencesError;
   });
   const loading = useSelector((state) => {
     return state.loadedProfiles.loadingProfile;
@@ -53,14 +58,17 @@ const ExperiencesSection = ({ userId }) => {
       >
         <div className="d-flex justify-content-between">
           <div>
-            <h2 className="ml-2">Experience</h2>
+            <h2 className="ml-3 my-2">Experiences</h2>
           </div>
           <div className="mt-1">
             {isOnMyProfile && <AddButton userId={userId} />}
           </div>
         </div>
         <ListGroup>
-          {experiences.map((exp) => {
+            {experiencesLoading && <Loading />}
+            {!experiencesLoading && experiencesError && <Warning variant="danger" message="error loading experiences" />}
+            {!experiencesLoading && !experiencesError && experiences.length === 0 && <Warning variant="info" message="No Experiences, add some using the + button!" />}
+          {!experiencesLoading && !experiencesError && !(experiences.length === 0) && experiences.map((exp) => {
             return <ExperienceItem key={exp._id} itemKey={exp._id} exp={exp} userId={userId} />;
           })}
         </ListGroup>

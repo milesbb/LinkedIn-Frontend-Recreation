@@ -1,9 +1,11 @@
 import { format } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getExperiences } from "../redux/actions/getExperiences";
 import { handleExperiences } from "../redux/actions/handleExperience";
+import Loading from "./Loading";
+import Warning from "./Warning";
 
 const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
   const dispatch = useDispatch();
@@ -13,6 +15,18 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
   const [date, setDate] = useState("");
   const [desc, setDesc] = useState("");
   const [area, setArea] = useState("");
+
+  const handleExpLoading = useSelector((state) => {
+    return state.handleExperiences.handleExpLoading;
+  });
+
+  const handleExpError = useSelector((state) => {
+    return state.handleExperiences.handleExpError;
+  });
+
+  const handleExpSuccess = useSelector((state) => {
+    return state.handleExperiences.handleExpSuccess;
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +41,7 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
       role: roleForEdit,
       company: companyForEdit,
       startDate: dateForEdit,
+      //   COME BACK TO THIS, DATE LENGTH AN ISSUE THIS WORKS
       endDate: null,
       description: descForEdit,
       area: areaForEdit,
@@ -34,17 +49,26 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
 
     console.log(editData);
 
-    const methodString = (purpose === "addExp")? "POST":"PUT"
+    const methodString = purpose === "addExp" ? "POST" : "PUT";
 
-    dispatch(handleExperiences("POST", userId, id, editData));
+    dispatch(handleExperiences(methodString, userId, id, editData));
 
     dispatch(getExperiences(userId, ""));
     console.log("FORM SUBMITTED");
   };
+
+  useEffect(() => {
+    if (handleExpLoading) {
+        dispatch(getExperiences(userId, ""));
+    }
+  }, [handleExpLoading])
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{(purpose === "addExp")? "Add Experience": "Edit Experience"}</Modal.Title>
+        <Modal.Title>
+          {purpose === "addExp" ? "Add Experience" : "Edit Experience"}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form className="w-75">
@@ -54,7 +78,7 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
             onChange={(e) => {
               setRole(e.target.value);
             }}
-            placeholder={(purpose === "addExp")? "": data.role}
+            placeholder={purpose === "addExp" ? "" : data.role}
           />
           <p className="mt-3">Company</p>
           <Form.Control
@@ -62,15 +86,21 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
             onChange={(e) => {
               setCompany(e.target.value);
             }}
-            placeholder={(purpose === "addExp")? "": data.company}
+            placeholder={purpose === "addExp" ? "" : data.company}
           />
           <p className="mt-3">Date</p>
           <Form.Control
             type="date"
             onChange={(e) => {
-              setDate(format(new Date(e.target.value), "yyyy") + "-" + format(new Date(e.target.value), "mm") + "-" + format(new Date(e.target.value), "dd") + "T00:00:00.000Z");
+              setDate(
+                format(new Date(e.target.value), "yyyy") +
+                  "-" +
+                  format(new Date(e.target.value), "MM") +
+                  "-" +
+                  format(new Date(e.target.value), "dd")
+              );
             }}
-            placeholder={(purpose === "addExp")? "": data.date}
+            placeholder={purpose === "addExp" ? "" : data.date}
           />
           <p className="mt-3">Description</p>
           <Form.Control
@@ -78,7 +108,7 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
             onChange={(e) => {
               setDesc(e.target.value);
             }}
-            placeholder={(purpose === "addExp")? "": data.description}
+            placeholder={purpose === "addExp" ? "" : data.description}
           />
           <p className="mt-3">Location</p>
           <Form.Control
@@ -86,8 +116,31 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
             onChange={(e) => {
               setArea(e.target.value);
             }}
-            placeholder={(purpose === "addExp")? "": data.area}
+            placeholder={purpose === "addExp" ? "" : data.area}
           />
+          <div className="my-2">
+            {handleExpLoading && <Loading />}
+            {!handleExpLoading && handleExpError && (
+              <Warning
+                variant="danger"
+                message={
+                  purpose === "addExp"
+                    ? "Error with adding experience"
+                    : "Error with editing experience"
+                }
+              />
+            )}
+            {!handleExpLoading && !handleExpError && handleExpSuccess && (
+              <Warning
+                variant="success"
+                message={
+                  purpose === "addExp"
+                    ? "Experience added!"
+                    : "Experience edited!"
+                }
+              />
+            )}
+          </div>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close

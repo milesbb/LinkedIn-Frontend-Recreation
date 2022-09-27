@@ -1,15 +1,15 @@
 import { format, formatDuration, intervalToDuration } from "date-fns";
 import { Col, Image, ListGroupItem, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 
 const ExperienceItem = ({ exp, itemKey, userId }) => {
-
-    const isOnMyProfile = useSelector((state) => {
-        return state.loadedProfiles.isOnMyProfile;
-      });
+  const isOnMyProfile = useSelector((state) => {
+    return state.loadedProfiles.isOnMyProfile;
+  });
   return (
-    <ListGroupItem className="position-relative">
+    <ListGroupItem className="position-relative" style={{border: "none"}}>
       <div className="d-flex">
         <div>
           <Image
@@ -46,10 +46,20 @@ const ExperienceItem = ({ exp, itemKey, userId }) => {
           <p>{exp.description}</p>
         </div>
         <div className="position-absolute" style={{ right: "1rem" }}>
-          {isOnMyProfile && <EditButton purpose="exp" data={exp} id={itemKey} userId={userId} />}
-          
+          {isOnMyProfile && (
+            <div>
+              <EditButton
+                purpose="exp"
+                data={exp}
+                id={itemKey}
+                userId={userId}
+              />
+              <DeleteButton id={itemKey} userId={userId} />
+            </div>
+          )}
         </div>
       </div>
+      <hr></hr>
     </ListGroupItem>
   );
 };

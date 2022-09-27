@@ -15,6 +15,17 @@ export const handleExperiences = (type, userId, experienceId, data) => {
         type: HANDLE_EXPERIENCE_LOADING,
         payload: true,
       });
+
+      dispatch({
+        type: HANDLE_EXPERIENCE_ERROR,
+        payload: false,
+      });
+
+      dispatch({
+        type: HANDLE_EXPERIENCE_SUCCESS,
+        payload: false,
+      });
+
       let fetchURL =
         "https://striveschool-api.herokuapp.com/api/profile/" +
         userId +
@@ -47,8 +58,6 @@ export const handleExperiences = (type, userId, experienceId, data) => {
       let response = await fetch(fetchURL, chosenConfig);
 
       if (response.ok) {
-        let experiences = await response.json();
-
         dispatch({
           type: HANDLE_EXPERIENCE_SUCCESS,
           payload: true,
@@ -57,18 +66,30 @@ export const handleExperiences = (type, userId, experienceId, data) => {
         console.log("error with initial fetch");
         dispatch({
           type: HANDLE_EXPERIENCE_ERROR,
+          payload: true,
         });
       }
     } catch (error) {
       console.log("try catch error:", error);
       dispatch({
         type: HANDLE_EXPERIENCE_ERROR,
+        payload: true,
       });
     } finally {
       dispatch({
         type: HANDLE_EXPERIENCE_LOADING,
         payload: false,
       });
+      const errorTimeout = setTimeout(() => {
+        dispatch({
+          type: HANDLE_EXPERIENCE_ERROR,
+          payload: false,
+        });
+        dispatch({
+          type: HANDLE_EXPERIENCE_SUCCESS,
+          payload: false,
+        });
+      }, 3000);
     }
   };
 };

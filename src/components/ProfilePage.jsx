@@ -51,6 +51,9 @@ const ProfilePage = () => {
 
   useEffect(() => {
     getMyData();
+    if (params.userId !== undefined) {
+        getOtherProfileData()
+    }
   }, []);
 
   useEffect(() => {

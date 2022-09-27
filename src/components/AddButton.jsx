@@ -11,13 +11,14 @@ const AddButton = ({ userId }) => {
       <Button
         style={{ background: "none", color: "black", border: "none" }}
         onClick={handleShow}
+        className="mr-4 my-2"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="30"
           height="30"
           fill="currentColor"
-          className="bi bi-plus-lg mr-4"
+          className="bi bi-plus-lg"
           viewBox="0 0 16 16"
         >
           <path
