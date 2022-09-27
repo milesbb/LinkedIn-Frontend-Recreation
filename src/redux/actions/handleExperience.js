@@ -18,7 +18,7 @@ export const handleExperiences = (type, userId, experienceId, data) => {
       let fetchURL =
         "https://striveschool-api.herokuapp.com/api/profile/" +
         userId +
-        "experiences/";
+        "/experiences/";
 
       if (type !== "POST") {
         fetchURL = fetchURL + experienceId;
@@ -28,12 +28,18 @@ export const handleExperiences = (type, userId, experienceId, data) => {
         method: type,
         body: JSON.stringify(data),
         headers: new Headers({
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzMxNjQzOTc2NTM5YzAwMTViNWNkNjkiLCJpYXQiOjE2NjQxODEzMDUsImV4cCI6MTY2NTM5MDkwNX0.KhUolJNoXb0Qw4Ddn9_bNvXY60qoqEiyqDK01VX9OE8",
           "Content-Type": "application/json",
         }),
       };
 
       const deleteConfig = {
         method: "DELETE",
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzMxNjQzOTc2NTM5YzAwMTViNWNkNjkiLCJpYXQiOjE2NjQxODEzMDUsImV4cCI6MTY2NTM5MDkwNX0.KhUolJNoXb0Qw4Ddn9_bNvXY60qoqEiyqDK01VX9OE8",
+        },
       };
 
       const chosenConfig = type === "DELETE" ? deleteConfig : postPutConfig;

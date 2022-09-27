@@ -43,7 +43,7 @@ const Bio = ({ profileData, isOnMyProfile }) => {
           <h3>{profileData.title}</h3>
           <p>{profileData.area}</p>
         </div>
-        {isOnMyProfile && <EditButton />}
+        {isOnMyProfile && <EditButton purpose="profile" />}
       </div>
       {/* {editLoading && <Loading className="fixed-bottom" />}
           {!editLoading && editErrorOccurred && (

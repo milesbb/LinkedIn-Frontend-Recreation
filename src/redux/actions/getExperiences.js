@@ -6,7 +6,7 @@ export const GET_SPECIFIC_EXPERIENCE = "GET_SPECIFIC_EXPERIENCE";
 // userId mandatory
 
 // if experienceId =
-// "" then returns list of profiles to 'experiences'
+// "" then returns list of experiences to 'experiences'
 // an experience ID as string then returns object of specific experience to 'profile'
 
 export const getExperiences = (userId, experienceId) => {
