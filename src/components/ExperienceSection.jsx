@@ -2,13 +2,13 @@ import { Col, ListGroup, Row, Image } from "react-bootstrap";
 import { format } from "date-fns";
 
 const ExperienceSection = (experience) => {
-  const getMonthDifference = (start, end) => {
-    return (
-      end.getMonth() -
-      start.getMonth() +
-      12 * (end.getFullYear() - start.getFullYear())
-    );
-  };
+  // const getMonthDifference = (start, end) => {
+  //   return (
+  //     end.getMonth() -
+  //     start.getMonth() +
+  //     12 * (end.getFullYear() - start.getFullYear())
+  //   );
+  // };
 
   return (
     <div>
@@ -60,9 +60,9 @@ const ExperienceSection = (experience) => {
               </p>
               <p>{experience.role} · postion</p>
               <p style={{ color: "gray" }}>
-                {format(new Date(experience.startDate), "MMMM/YYYY")} -
+                {/* {format(new Date(experience.startDate), "MMMM/YYYY")} -
                 {format(new Date(experience.endDate), "MMMM/YYYY")} ·{" "}
-                {getMonthDifference(experience.startDate, experience.endDate)}{" "}
+                {getMonthDifference(experience.startDate, experience.endDate)}{" "} */}
                 <br /> {experience.area}
               </p>
 
