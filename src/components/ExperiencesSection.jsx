@@ -67,7 +67,7 @@ const ExperiencesSection = ({ userId }) => {
         <ListGroup>
             {experiencesLoading && <Loading />}
             {!experiencesLoading && experiencesError && <Warning variant="danger" message="error loading experiences" />}
-            {!experiencesLoading && !experiencesError && experiences.length === 0 && <Warning variant="info" message="No Experiences, add some using the + button!" />}
+            {!experiencesLoading && !experiencesError && experiences.length === 0 && <Warning variant="info" message={isOnMyProfile ? "No Experiences, add some using the + button!" : "This user has not uploaded any experiences"}/>}
           {!experiencesLoading && !experiencesError && !(experiences.length === 0) && experiences.map((exp) => {
             return <ExperienceItem key={exp._id} itemKey={exp._id} exp={exp} userId={userId} />;
           })}

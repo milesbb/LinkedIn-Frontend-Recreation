@@ -52,13 +52,16 @@ const ProfilePage = () => {
   useEffect(() => {
     getMyData();
     if (params.userId !== undefined) {
-        getOtherProfileData()
+      getOtherProfileData();
     }
   }, []);
 
   useEffect(() => {
     if (loading) {
       getMyData();
+      if (params.userId !== undefined) {
+        getOtherProfileData();
+      }
     }
   }, [loading]);
 
@@ -86,7 +89,11 @@ const ProfilePage = () => {
                 profileData={isOnMyProfile ? currentUser : profile}
               />
               <Link to="/">back to currentuser</Link>
-              {(profile || currentUser) && <ExperiencesSection userId={isOnMyProfile ? currentUser._id : profile._id} />}
+              {(profile || currentUser) && (
+                <ExperiencesSection
+                  userId={isOnMyProfile ? currentUser._id : profile._id}
+                />
+              )}
             </Col>
             <Col sm={12} md={4} lg={3}>
               <SideProfiles />

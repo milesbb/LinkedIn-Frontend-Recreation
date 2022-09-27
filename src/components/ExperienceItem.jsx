@@ -25,9 +25,9 @@ const ExperienceItem = ({ exp, itemKey, userId }) => {
 
         <div className="ml-3">
           <p>
-            <strong> {exp.company} </strong>
+            <strong> {exp.role} </strong>
           </p>
-          <p>{exp.role}</p>
+          <p>{exp.company}</p>
           <p style={{ color: "gray" }}>
             {format(new Date(exp.startDate), "MMM yyyy") +
               "" +
