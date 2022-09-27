@@ -9,7 +9,7 @@ const ExperienceItem = ({ exp, itemKey, userId }) => {
     return state.loadedProfiles.isOnMyProfile;
   });
   return (
-    <ListGroupItem className="position-relative" style={{border: "none"}}>
+    <ListGroupItem className="position-relative" style={{ border: "none" }}>
       <div className="d-flex">
         <div>
           <Image
@@ -30,14 +30,13 @@ const ExperienceItem = ({ exp, itemKey, userId }) => {
           <p>{exp.company}</p>
           <p style={{ color: "gray" }}>
             {format(new Date(exp.startDate), "MMM yyyy") +
-              "" +
               " - " +
               formatDuration(
                 intervalToDuration({
                   start: new Date(exp.startDate),
                   end: new Date(),
                 }),
-                { format: ["months"] }
+                { format: ["months", "days"] }
               )}
             <br></br>
             {exp.area}
