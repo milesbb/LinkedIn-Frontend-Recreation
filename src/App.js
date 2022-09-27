@@ -1,14 +1,13 @@
 import logo from "./logo.svg";
+import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css";
 import { BrowserRouter, Router } from "react-router-dom";
+import NavFunction from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
-      {/* PUT NAVBAR HERE */}
-      <BrowserRouter>
-        <Router>{/* ADD ROUTES HERE */}</Router>
-      </BrowserRouter>
+      <NavFunction/>
     </div>
   );
 }
