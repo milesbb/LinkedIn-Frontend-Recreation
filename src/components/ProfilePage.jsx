@@ -98,7 +98,8 @@ const ProfilePage = () => {
                 isOnMyProfile={isOnMyProfile}
                 profileData={isOnMyProfile ? currentUser : profile}
               />
-              <Link to="/">back to currentuser</Link>
+              <Link to="/profiles/me">back to currentuser</Link>
+              <Link to="/">to posts section</Link>
               {(profile || currentUser) && (
                 <ExperiencesSection
                   userId={isOnMyProfile ? currentUser._id : profile._id}
