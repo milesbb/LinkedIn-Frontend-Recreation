@@ -40,7 +40,7 @@ const PostItem = ({ post, onMyPosts }) => {
         <Card.Text>
           <div className="w-75 ml-4">{post.text}</div>
         </Card.Text>
-        {/*   <Card.Img variant="top" src={post.user.image} /> */}
+        {post._image !== null &&  <Card.Img variant="top" src={post.user.image} /> }
         <Card.Body>
           <Button
             variant="light"

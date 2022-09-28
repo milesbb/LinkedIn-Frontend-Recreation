@@ -111,6 +111,7 @@ const PostsSection = () => {
                     />
                   );
                 })}
+                <PostPagination />
               </>
             )}
           </>

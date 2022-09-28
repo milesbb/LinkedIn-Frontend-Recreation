@@ -12,6 +12,9 @@ const PostPagination = () => {
   const previousPagination = useSelector((state) => {
     return state.loadedPosts.previousPagination;
   });
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+}
 
   const paginate = (direction) => {
     if (direction === "forward") {
@@ -21,7 +24,7 @@ const PostPagination = () => {
             dispatch({type: DECREMENT_POST_PAGINATER})
         }
     }
-    
+    scrollToTop()
     dispatch(getPosts(""))
   }
  
