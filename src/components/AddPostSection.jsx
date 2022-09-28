@@ -1,10 +1,17 @@
-import { FormControl, Image, InputGroup } from "react-bootstrap";
+import { useState } from "react";
+import { Button, FormControl, Image, InputGroup } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import WritePostModal from "./WritePostModal";
 
 const AddPostSection = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const currentUser = useSelector((state) => {
     return state.loadedProfiles.currentUser;
   });
+
   return (
     <div
       style={{
@@ -22,14 +29,8 @@ const AddPostSection = () => {
             borderRadius: "150rem",
           }}
         />
-        <InputGroup className="mt-1 ml-2">
-          <FormControl
-            placeholder="Start a post"
-            aria-label="Start a post"
-            aria-describedby="basic-addon2"
-            style={{borderRadius: "50px"}}
-          />
-        </InputGroup>
+        <Button variant="light text-left pl-4 ml-2" className="font-weight-bold" style={{color: "gray", border: "1px solid gray", width: "87%", borderRadius: "50px"}} onClick={handleShow}>Start a post</Button>
+        <WritePostModal show={show} handleClose={handleClose}/>
       </div>
     </div>
   );
