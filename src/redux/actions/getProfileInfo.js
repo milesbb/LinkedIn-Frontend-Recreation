@@ -3,7 +3,7 @@ export const GET_PROFILE_INFO_ERROR = "GET_PROFILE_INFO_ERROR";
 export const GET_PROFILE_INFO_LOADING = "GET_PROFILE_INFO_LOADING";
 export const GET_PROFILES_LIST = "GET_PROFILES_LIST";
 export const GET_CURRENT_USER = "GET_CURRENT_USER";
-export const ON_MY_PROFILE = "ON_MY_PROFILE"
+export const ON_MY_PROFILE = "ON_MY_PROFILE";
 
 // if userId =
 // "" then returns list of profiles to 'profilesList'
@@ -21,18 +21,37 @@ export const getProfile = (userId) => {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/" + userId,
         {
-            headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzMxNjQzOTc2NTM5YzAwMTViNWNkNjkiLCJpYXQiOjE2NjQxODEzMDUsImV4cCI6MTY2NTM5MDkwNX0.KhUolJNoXb0Qw4Ddn9_bNvXY60qoqEiyqDK01VX9OE8'
-            }
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzMxNjQzOTc2NTM5YzAwMTViNWNkNjkiLCJpYXQiOjE2NjQxODEzMDUsImV4cCI6MTY2NTM5MDkwNX0.KhUolJNoXb0Qw4Ddn9_bNvXY60qoqEiyqDK01VX9OE8",
+          },
         }
       );
 
       if (response.ok) {
         let profile = await response.json();
         if (userId === "") {
+          let temArray = profile;
+
+          const randomArrayShuffle = (array) => {
+            let currentIndex = array.length,
+              temporaryValue,
+              randomIndex;
+            while (0 !== currentIndex) {
+              randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex -= 1;
+              temporaryValue = array[currentIndex];
+              array[currentIndex] = array[randomIndex];
+              array[randomIndex] = temporaryValue;
+            }
+            return array;
+          };
+
+          let finalArray = randomArrayShuffle(temArray).slice(0, 15);
+
           dispatch({
             type: GET_PROFILES_LIST,
-            payload: profile,
+            payload: finalArray,
           });
         } else if (userId === "me") {
           dispatch({
