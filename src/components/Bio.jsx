@@ -1,4 +1,3 @@
-import LZString from "lz-string";
 import { useState } from "react";
 import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
