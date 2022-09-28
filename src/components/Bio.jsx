@@ -19,6 +19,7 @@ const Bio = ({ profileData, isOnMyProfile }) => {
         className="position-absolute"
         style={{
           width: "12rem",
+          height: "12rem",
           left: "3vw",
           top: "6vh",
           background: "white",

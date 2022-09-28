@@ -14,11 +14,11 @@ const ExperienceItem = ({ exp, itemKey, userId }) => {
         <div>
           <Image
             style={{
-              borderRadius: "100rem",
+              
               width: "60px",
               height: "60px",
             }}
-            src="https://media.istockphoto.com/photos/smart-home-symbol-picture-id1314037715?b=1&k=20&m=1314037715&s=170667a&w=0&h=vFoSrBkotNvWgwfQz013ZuLzGw0aWJfLeMkCPTuAxQY="
+            src={exp.image}
             alt="logo"
           />
         </div>

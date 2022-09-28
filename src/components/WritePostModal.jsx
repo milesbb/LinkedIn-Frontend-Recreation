@@ -6,11 +6,12 @@ import { handlePosts } from "../redux/actions/handlePosts";
 
 const WritePostModal = ({ show, handleClose, purpose, data }) => {
   const dispatch = useDispatch();
+  const [newPost, setNewPost] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const currentUser = useSelector((state) => {
     return state.loadedProfiles.currentUser;
   });
-
-  const [newPost, setNewPost] = useState("");
 
   const handlePostLoading = useSelector((state) => {
     return state.handlePosts.handlePostLoading;
@@ -27,24 +28,28 @@ const WritePostModal = ({ show, handleClose, purpose, data }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const textForEdit = newPost ? newPost : data.text
+    const textForEdit = newPost ? newPost : data.text;
 
     const editData = {
       text: textForEdit,
     };
 
     console.log(editData);
+    console.log(selectedFile);
+
+    const postImgFormData = new FormData();
+    if (selectedFile !== null) {
+      postImgFormData.append("post", selectedFile);
+    }
+    console.log(postImgFormData);
+    const finalImgData = selectedFile !== null ? postImgFormData : null;
 
     const methodString = purpose === "add" ? "POST" : "PUT";
 
     if (methodString === "POST") {
-        dispatch(
-            handlePosts(methodString, "", editData)
-          );
+      dispatch(handlePosts(methodString, "", editData, null));
     } else {
-        dispatch(
-            handlePosts(methodString, data._id, editData)
-          );
+      dispatch(handlePosts(methodString, data._id, editData, finalImgData));
     }
 
     dispatch(getPosts(""));
@@ -60,7 +65,9 @@ const WritePostModal = ({ show, handleClose, purpose, data }) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{purpose === "edit" ? "Edit post" : "Create a post"}</Modal.Title>
+        <Modal.Title>
+          {purpose === "edit" ? "Edit post" : "Create a post"}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form className="w-100">
@@ -94,13 +101,30 @@ const WritePostModal = ({ show, handleClose, purpose, data }) => {
             </Form.Label>
             <Form.Control
               as="textarea"
-              placeholder={purpose === "edit" ? data.text : "What do you want to talk about?"}
+              placeholder={
+                purpose === "edit"
+                  ? data.text
+                  : "What do you want to talk about?"
+              }
               rows={5}
               onChange={(e) => {
                 setNewPost(e.target.value);
               }}
               style={{ border: "none" }}
             />
+            {purpose !== "add" &&
+              <div>
+                <p className="mt-3">Image Upload</p>
+                <Form.File
+                  required
+                  name="file"
+                  label="File"
+                  onChange={(e) => {
+                    setSelectedFile(e.target.files[0]);
+                  }}
+                />
+              </div>
+            }
           </Form.Group>
           <Modal.Footer>
             <Button

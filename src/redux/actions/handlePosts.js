@@ -5,7 +5,7 @@ export const HANDLE_POST_ERROR = "HANDLE_POST_ERROR";
 // DELETE - type mandatory
 // POST, PUT - type, postId, data mandatory
 
-export const handlePosts = (type, postId, data) => {
+export const handlePosts = (type, postId, data, imgData) => {
   return async (dispatch, getState) => {
     try {
       dispatch({
@@ -52,6 +52,19 @@ export const handlePosts = (type, postId, data) => {
       let response = await fetch(fetchURL, chosenConfig);
 
       if (response.ok) {
+        if (imgData !== null) {
+          let imgResponse = await fetch(
+            "https://striveschool-api.herokuapp.com/api/posts/" + postId,
+            {
+              method: "POST",
+              body: imgData,
+              headers: {
+                Authorization:
+                  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzMxNjQzOTc2NTM5YzAwMTViNWNkNjkiLCJpYXQiOjE2NjQxODEzMDUsImV4cCI6MTY2NTM5MDkwNX0.KhUolJNoXb0Qw4Ddn9_bNvXY60qoqEiyqDK01VX9OE8",
+              },
+            }
+          );
+        }
         dispatch({
           type: HANDLE_POST_SUCCESS,
           payload: true,

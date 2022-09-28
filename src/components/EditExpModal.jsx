@@ -15,6 +15,7 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
   const [date, setDate] = useState("");
   const [desc, setDesc] = useState("");
   const [area, setArea] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleExpLoading = useSelector((state) => {
     return state.handleExperiences.handleExpLoading;
@@ -41,17 +42,24 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
       role: roleForEdit,
       company: companyForEdit,
       startDate: dateForEdit,
-      //   COME BACK TO THIS, DATE LENGTH AN ISSUE THIS WORKS
       endDate: null,
       description: descForEdit,
       area: areaForEdit,
     };
 
     console.log(editData);
+    console.log(selectedFile);
+
+    const expImgFormData = new FormData();
+    if (selectedFile !== null) {
+      expImgFormData.append("experience", selectedFile);
+    }
+    console.log(expImgFormData);
+    const finalImgData = (selectedFile !== null)? expImgFormData : null
 
     const methodString = purpose === "addExp" ? "POST" : "PUT";
 
-    dispatch(handleExperiences(methodString, userId, id, editData));
+    dispatch(handleExperiences(methodString, userId, id, editData, finalImgData));
 
     dispatch(getExperiences(userId, ""));
     console.log("FORM SUBMITTED");
@@ -59,9 +67,9 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
 
   useEffect(() => {
     if (handleExpLoading) {
-        dispatch(getExperiences(userId, ""));
+      dispatch(getExperiences(userId, ""));
     }
-  }, [handleExpLoading])
+  }, [handleExpLoading]);
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -117,6 +125,15 @@ const EditExpModal = ({ show, handleClose, id, userId, data, purpose }) => {
               setArea(e.target.value);
             }}
             placeholder={purpose === "addExp" ? "" : data.area}
+          />
+          <p className="mt-3">Image Upload</p>
+          <Form.File
+            required
+            name="file"
+            label="File"
+            onChange={(e) => {
+              setSelectedFile(e.target.files[0]);
+            }}
           />
           <div className="my-2">
             {handleExpLoading && <Loading />}

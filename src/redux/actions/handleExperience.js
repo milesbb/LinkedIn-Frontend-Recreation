@@ -7,7 +7,7 @@ export const HANDLE_EXPERIENCE_ERROR = "HANDLE_EXPERIENCE_ERROR";
 // DELETE - type, experienceId and userId mandatory
 // POST, PUT - type, userId, experienceId, and data mandatory
 
-export const handleExperiences = (type, userId, experienceId, data) => {
+export const handleExperiences = (type, userId, experienceId, data, imgData) => {
   return async (dispatch, getState) => {
     try {
       dispatch({
@@ -57,6 +57,21 @@ export const handleExperiences = (type, userId, experienceId, data) => {
       let response = await fetch(fetchURL, chosenConfig);
 
       if (response.ok) {
+        if (imgData !== null) {
+          let imgResponse = await fetch(
+            "https://striveschool-api.herokuapp.com/api/profile/" +
+              userId +
+              "/experiences/"+experienceId+"/picture",
+            {
+              method: "POST",
+              body: imgData,
+              headers: {
+                Authorization:
+                  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzMxNjQzOTc2NTM5YzAwMTViNWNkNjkiLCJpYXQiOjE2NjQxODEzMDUsImV4cCI6MTY2NTM5MDkwNX0.KhUolJNoXb0Qw4Ddn9_bNvXY60qoqEiyqDK01VX9OE8",
+              },
+            }
+          );
+        }
         dispatch({
           type: HANDLE_EXPERIENCE_SUCCESS,
           payload: true,
