@@ -3,11 +3,12 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProfilePage from "./components/ProfilePage";
 import PostsPage from "./components/PostsPage";
+import NavFunction from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
-      {/* PUT NAVBAR HERE */}
+      <NavFunction />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<PostsPage />} />
