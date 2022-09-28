@@ -10,11 +10,13 @@ import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Loading from './Loading';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';  
+import SearchReseult from './SearchReseult';
 
 
 const NavFunction=()=> {
 
-
+  const [query, setQuery] = useState("")
 
     const currentUser = useSelector((state) => {
         return state.loadedProfiles.currentUser;
@@ -52,7 +54,10 @@ const NavFunction=()=> {
                               <Form.Control
                                   type="text" style={{height:'40px', border:'0px'}}
                                   placeholder="Search"
+                                  value={query}
+                                  onChange={(e) => setQuery(e.target.value)}
                               />
+                            { query.length === 0 ? "" : <SearchReseult query={query} />}
                           </InputGroup>
                       </Form.Group>
                   </Form.Row>

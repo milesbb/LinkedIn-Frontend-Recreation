@@ -8,8 +8,9 @@ import NavFunction from "./components/Navbar";
 function App() {
   return (
     <div className="App">
-      <NavFunction />
+      
       <BrowserRouter>
+      <NavFunction />
         <Routes>
           <Route path="/" element={<PostsPage />} />
           <Route path="/profiles/me" element={<ProfilePage />} />
