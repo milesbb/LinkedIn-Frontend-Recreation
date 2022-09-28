@@ -4,6 +4,7 @@ export const GET_PROFILE_INFO_LOADING = "GET_PROFILE_INFO_LOADING";
 export const GET_PROFILES_LIST = "GET_PROFILES_LIST";
 export const GET_CURRENT_USER = "GET_CURRENT_USER";
 export const ON_MY_PROFILE = "ON_MY_PROFILE";
+export const SET_ID_FOR_POSTS = "SET_ID_FOR_POSTS"
 
 // if userId =
 // "" then returns list of profiles to 'profilesList'
@@ -58,6 +59,10 @@ export const getProfile = (userId) => {
             type: GET_CURRENT_USER,
             payload: profile,
           });
+        //   dispatch({
+        //     type: SET_ID_FOR_POSTS,
+        //     payload: profile._id
+        //   })
         } else {
           dispatch({
             type: GET_PROFILE_INFO,

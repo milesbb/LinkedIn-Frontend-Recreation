@@ -21,7 +21,7 @@ const PostPagination = () => {
             dispatch({type: DECREMENT_POST_PAGINATER})
         }
     }
-
+    
     dispatch(getPosts(""))
   }
  

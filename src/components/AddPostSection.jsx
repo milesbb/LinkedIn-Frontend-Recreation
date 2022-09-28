@@ -29,8 +29,20 @@ const AddPostSection = () => {
             borderRadius: "150rem",
           }}
         />
-        <Button variant="light text-left pl-4 ml-2" className="font-weight-bold" style={{color: "gray", border: "1px solid gray", width: "87%", borderRadius: "50px"}} onClick={handleShow}>Start a post</Button>
-        <WritePostModal show={show} handleClose={handleClose} purpose="add"/>
+        <Button
+          variant="light text-left pl-4 ml-2"
+          className="font-weight-bold"
+          style={{
+            color: "gray",
+            border: "1px solid gray",
+            width: "87%",
+            borderRadius: "50px",
+          }}
+          onClick={handleShow}
+        >
+          Start a post
+        </Button>
+        <WritePostModal show={show} handleClose={handleClose} purpose="add" />
       </div>
     </div>
   );

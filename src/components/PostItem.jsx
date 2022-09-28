@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 const PostItem = ({post}) => {
   return (
     <div

@@ -4,8 +4,9 @@ export const GET_POSTS = "GET_POSTS";
 export const GET_POSTS_ERROR = "GET_POSTS_ERROR";
 export const GET_POSTS_LOADING = "GET_POSTS_LOADING";
 export const GET_SPECIFIC_POST = "GET_SPECIFIC_POST";
-export const INCREMENT_POST_PAGINATER = "INCREMENT_POST_PAGINATER"
-export const DECREMENT_POST_PAGINATER = "DECREMENT_POST_PAGINATER"
+export const INCREMENT_POST_PAGINATER = "INCREMENT_POST_PAGINATER";
+export const DECREMENT_POST_PAGINATER = "DECREMENT_POST_PAGINATER";
+export const GET_MY_POSTS = "GET_MY_POSTS";
 
 // userId mandatory
 
@@ -39,11 +40,11 @@ export const getPosts = (postId) => {
 
       if (response.ok) {
         let posts = await response.json();
-        let cutPosts = posts.reverse()
+        let reversedPosts = posts.reverse();
         if (postId === "") {
           dispatch({
             type: GET_POSTS,
-            payload: cutPosts,
+            payload: [reversedPosts, posts],
           });
         } else {
           dispatch({
