@@ -206,7 +206,7 @@ const NavFunction=()=> {
               
               </NavDropdown>
               <Nav.Link href="#" style={{color:'#915907', textDecoration:'underline',fontSize:'12px'}} className='postion-relative mt-4'>
-                try Primium for <br/> free
+                try Premium for <br/> free
               </Nav.Link>
             </Nav>
            
