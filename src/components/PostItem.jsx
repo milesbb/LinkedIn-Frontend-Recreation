@@ -29,7 +29,7 @@ const PostItem = ({ post, onMyPosts }) => {
               <h6>{post.user.company}</h6>
             </div>
             {onMyPosts && 
-            <div className="ml-auto">
+            <div className="ml-auto d-flex">
                 <EditButton purpose="editPost" data={post} />
                 <DeleteButton purpose="deletePost" id={post._id} />
             </div>
