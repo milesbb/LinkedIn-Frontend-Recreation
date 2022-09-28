@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.my-dropdown-toggle::after {
+  content: none;
+}
+
+
+.text-underline-hover:hover {
+  text-decoration: underline;
+}
