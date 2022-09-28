@@ -51,7 +51,9 @@ const PostsSection = () => {
       getPostsData();
     }
   }, [postsLoading]);
+
   console.log(postsLoading, postsError, posts);
+
   return (
     <div>
       {postsLoading && <Loading />}
@@ -111,7 +113,10 @@ const PostsSection = () => {
                     />
                   );
                 })}
+                <div className="mb-5">
+
                 <PostPagination />
+                </div>
               </>
             )}
           </>

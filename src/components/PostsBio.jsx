@@ -6,6 +6,14 @@ const PostsBio = () => {
   const currentUser = useSelector((state) => {
     return state.loadedProfiles.currentUser;
   });
+
+  const backgroundPicObj = {
+    background: "gray",
+      backgroundImage: "url(" + currentUser.image + ")",
+      overflow: "hidden",
+      height: "11vh",
+      borderRadius: "10px 10px 0 0",
+}
   return (
     <div
       style={{
@@ -19,7 +27,7 @@ const PostsBio = () => {
         style={{
           width: "5rem",
           left: "34%",
-          top: "10%",
+          top: "6%",
           background: "white",
           borderRadius: "150rem",
           border: "solid 3px white",
@@ -27,12 +35,7 @@ const PostsBio = () => {
         src={currentUser.image}
       />
       <div
-        style={{
-          background: "gray",
-          overflow: "hidden",
-          height: "9vh",
-          borderRadius: "10px 10px 0 0",
-        }}
+        style={backgroundPicObj}
         className="w-100 mb-5"
       ></div>
       <div className="mt-5 mx-auto d-flex w-75">

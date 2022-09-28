@@ -1,12 +1,15 @@
-import { useState } from "react";
 import { Image } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { changeProfile } from "../redux/actions/changeProfile";
-import { getProfile } from "../redux/actions/getProfileInfo";
 import EditButton from "./EditButton";
 
 const Bio = ({ profileData, isOnMyProfile }) => {
-    console.log("current user", profileData);
+  console.log("current user", profileData);
+  const backgroundPicObj = {
+    background: "gray",
+    backgroundImage: "url(" + profileData.image + ")",
+    overflow: "hidden",
+    height: "25vh",
+    borderRadius: "10px 10px 0 0",
+  };
   return (
     <div
       style={{
@@ -28,15 +31,7 @@ const Bio = ({ profileData, isOnMyProfile }) => {
         }}
         src={profileData.image}
       />
-      <div
-        style={{
-          background: "gray",
-          overflow: "hidden",
-          height: "25vh",
-          borderRadius: "10px 10px 0 0",
-        }}
-        className="w-100 mb-5"
-      ></div>
+      <div style={backgroundPicObj} className="w-100 mb-5"></div>
       <div className="mt-5 ml-5 d-flex w-75">
         <div className="mr-auto">
           <h1>{profileData.name + " " + profileData.surname}</h1>

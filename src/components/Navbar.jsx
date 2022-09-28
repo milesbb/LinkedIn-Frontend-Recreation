@@ -190,8 +190,8 @@ const NavFunction = () => {
                 style={{ width: "6vw" }}
                     className="mt-3"
                 title={
-                  <>
-                    <div style={{ lineHeight: "0.6rem" }} className="">
+                 
+                    <div style={{ lineHeight: "0.6rem" }}>
                       <img
                         style={{
                           borderRadius: 12,
@@ -205,11 +205,11 @@ const NavFunction = () => {
                         <span style={{ fontSize: "12px" }}>Me</span>
                       </div>
                     </div>
-                  </>
+                  
                 }
                 id="navbarScrollingDropdown"
               >
-                <NavDropdown.Item className="text-dark">
+                <NavDropdown.Item className="text-dark" style={{PointerEvent: "none"}}>
                   <div className="d-flex">
                     <Image
                       className="ml-3 mt-2"

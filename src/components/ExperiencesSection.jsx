@@ -37,9 +37,9 @@ const ExperiencesSection = ({ userId }) => {
     dispatch(getExperiences(userId, ""));
   };
 
-  useEffect(() => {
-    getExpData(userId);
-  }, []);
+//   useEffect(() => {
+//     getExpData(userId);
+//   }, []);
 
   useEffect(() => {
     getExpData(userId);
