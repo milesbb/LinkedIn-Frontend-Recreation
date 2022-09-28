@@ -1,10 +1,19 @@
-import { GET_POSTS, GET_POSTS_ERROR, GET_POSTS_LOADING, GET_SPECIFIC_POST } from "../actions/getPosts";
+import {
+  DECREMENT_POST_PAGINATER,
+  GET_POSTS,
+  GET_POSTS_ERROR,
+  GET_POSTS_LOADING,
+  GET_SPECIFIC_POST,
+  INCREMENT_POST_PAGINATER,
+} from "../actions/getPosts";
 
 const initialState = {
   posts: [],
   specificPost: null,
   postsLoading: false,
   postsError: false,
+  postPagination: 10,
+  previousPagination: 0,
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -12,7 +21,7 @@ const postsReducer = (state = initialState, action) => {
     case GET_POSTS:
       return {
         ...state,
-        posts: action.payload,
+        posts: action.payload.slice(state.previousPagination, state.postPagination),
       };
     case GET_SPECIFIC_POST:
       return {
@@ -28,6 +37,18 @@ const postsReducer = (state = initialState, action) => {
       return {
         ...state,
         postsError: action.payload,
+      };
+    case INCREMENT_POST_PAGINATER:
+      return {
+        ...state,
+        previousPagination: state.postPagination,
+        postPagination: state.postPagination + 10,
+      };
+    case DECREMENT_POST_PAGINATER:
+      return {
+        ...state,
+        postPagination: state.previousPagination,
+        previousPagination: state.previousPagination - 10,
       };
     default:
       return state;

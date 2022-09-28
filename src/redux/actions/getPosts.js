@@ -1,7 +1,11 @@
+import { useSelector } from "react-redux";
+
 export const GET_POSTS = "GET_POSTS";
 export const GET_POSTS_ERROR = "GET_POSTS_ERROR";
 export const GET_POSTS_LOADING = "GET_POSTS_LOADING";
 export const GET_SPECIFIC_POST = "GET_SPECIFIC_POST";
+export const INCREMENT_POST_PAGINATER = "INCREMENT_POST_PAGINATER"
+export const DECREMENT_POST_PAGINATER = "DECREMENT_POST_PAGINATER"
 
 // userId mandatory
 
@@ -35,7 +39,7 @@ export const getPosts = (postId) => {
 
       if (response.ok) {
         let posts = await response.json();
-        let cutPosts = posts.slice(0, 10)
+        let cutPosts = posts.reverse()
         if (postId === "") {
           dispatch({
             type: GET_POSTS,

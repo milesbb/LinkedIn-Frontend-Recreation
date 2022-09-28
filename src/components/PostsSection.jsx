@@ -1,8 +1,10 @@
 import { useEffect } from "react";
+import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../redux/actions/getPosts";
 import Loading from "./Loading";
 import PostItem from "./PostItem";
+import PostPagination from "./PostPagination";
 import Warning from "./Warning";
 
 const PostsSection = () => {
@@ -31,19 +33,21 @@ const PostsSection = () => {
       getPostsData();
     }
   }, [postsLoading]);
-console.log(postsLoading, postsError, posts)
+  console.log(postsLoading, postsError, posts);
   return (
     <div>
       {postsLoading && <Loading />}
       {!postsLoading && postsError && (
         <Warning variant="danger" message="error loading posts" />
       )}
-      {!postsLoading &&
-        !postsError &&
-        (posts.length !== 0) &&
-        posts.map((post) => {
-          return <PostItem key={post._id} post={post} />
-        })}
+      {!postsLoading && !postsError && posts.length !== 0 && (
+        <>
+          <PostPagination />
+          {posts.map((post) => {
+            return <PostItem key={post._id} post={post} />;
+          })}
+        </>
+      )}
     </div>
   );
 };
