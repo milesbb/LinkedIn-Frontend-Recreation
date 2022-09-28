@@ -53,7 +53,7 @@ const ExperienceItem = ({ exp, itemKey, userId }) => {
                 id={itemKey}
                 userId={userId}
               />
-              <DeleteButton id={itemKey} userId={userId} />
+              <DeleteButton id={itemKey} userId={userId} purpose="deleteExp"/>
             </div>
           )}
         </div>

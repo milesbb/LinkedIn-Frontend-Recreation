@@ -2,14 +2,20 @@ import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { getExperiences } from "../redux/actions/getExperiences";
 import { handleExperiences } from "../redux/actions/handleExperience";
+import { handlePosts } from "../redux/actions/handlePosts";
 
-const DeleteButton = ({ id, userId }) => {
+const DeleteButton = ({ id, userId, purpose }) => {
   const dispatch = useDispatch();
 
   const DeleteExperience = () => {
-    dispatch(handleExperiences("DELETE", userId, id, {}));
+    if (purpose === "deleteExp") {
+        dispatch(handleExperiences("DELETE", userId, id, {}));
+    
+        dispatch(getExperiences(userId, ""));
 
-    dispatch(getExperiences(userId, ""));
+    } else if (purpose === "deletePost") {
+        dispatch(handlePosts("DELETE", id, {}))
+    }
     console.log("ITEM DELETED");
   };
 

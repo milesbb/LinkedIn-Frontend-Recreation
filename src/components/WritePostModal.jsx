@@ -60,7 +60,7 @@ const WritePostModal = ({ show, handleClose, purpose, data }) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Create a post</Modal.Title>
+        <Modal.Title>{purpose === "edit" ? "Edit post" : "Create a post"}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form className="w-100">
@@ -94,7 +94,7 @@ const WritePostModal = ({ show, handleClose, purpose, data }) => {
             </Form.Label>
             <Form.Control
               as="textarea"
-              placeholder="What do you want to talk about?"
+              placeholder={purpose === "edit" ? data.text : "What do you want to talk about?"}
               rows={5}
               onChange={(e) => {
                 setNewPost(e.target.value);

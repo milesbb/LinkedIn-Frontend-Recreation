@@ -1,7 +1,9 @@
-import { Card } from "react-bootstrap";
+import { Card, Image } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, onMyPosts }) => {
   return (
     <div
       style={{
@@ -13,10 +15,11 @@ const PostItem = ({ post }) => {
       <Card>
         <Card.Title className="p-3">
           <div className="d-flex">
-            <img
+            <Image
               className="mr-2 mt-1"
               style={{ borderRadius: "25px", width: "50px", height: "50px" }}
               src={post.user.image}
+              alt="prof pic"
             />
             <div>
               <h5 className="font-weight-bold">
@@ -25,6 +28,13 @@ const PostItem = ({ post }) => {
               <h6>{post.user.title}</h6>
               <h6>{post.user.company}</h6>
             </div>
+            {onMyPosts && 
+            <div className="ml-auto">
+                <EditButton purpose="editPost" data={post} />
+                <DeleteButton purpose="deletePost" id={post._id} />
+            </div>
+            }
+
           </div>
         </Card.Title>
         <Card.Text>
