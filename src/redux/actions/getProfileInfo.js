@@ -5,6 +5,7 @@ export const GET_PROFILES_LIST = "GET_PROFILES_LIST";
 export const GET_CURRENT_USER = "GET_CURRENT_USER";
 export const ON_MY_PROFILE = "ON_MY_PROFILE";
 export const SET_ID_FOR_POSTS = "SET_ID_FOR_POSTS"
+export const GET_UNCUT_PROFILES_LIST = "GET_UNCUT_PROFILES_LIST"
 
 // if userId =
 // "" then returns list of profiles to 'profilesList'
@@ -32,6 +33,10 @@ export const getProfile = (userId) => {
       if (response.ok) {
         let profile = await response.json();
         if (userId === "") {
+
+          let tempArray2 = profile; 
+          let finalArray2 = tempArray2.slice(0,300)
+          dispatch({type:GET_UNCUT_PROFILES_LIST, payload: finalArray2})
           let temArray = profile;
 
           const randomArrayShuffle = (array) => {

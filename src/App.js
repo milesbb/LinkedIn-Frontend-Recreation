@@ -8,6 +8,7 @@ import NavFunction from "./components/Navbar";
 function App() {
   return (
     <div className="App">
+      
       <BrowserRouter>
       <NavFunction />
         <Routes>
