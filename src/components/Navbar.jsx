@@ -12,6 +12,7 @@ import Loading from "./Loading";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import SearchReseult from "./SearchReseult";
+import { Link } from "react-router-dom";
 
 const NavFunction = () => {
   const [query, setQuery] = useState("");
@@ -92,25 +93,27 @@ const NavFunction = () => {
                 style={{ maxHeight: "100px", marginLeft: 0 }}
                 navbarScroll
               >
+                  {/* <Link to="/" className="nav-link" style={{ color: "black" }}> */}
                 <Nav.Link href="#action1">
-                  <div className="mt-3 position-relative">
-                    <div className="mt-3">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 30 30"
-                        data-supported-dps="24x24"
-                        fill="currentColor"
-                        className="mercado-match align-bottom"
-                        width="30px"
-                        height="30px"
-                        focusable="false"
-                      >
-                        <path d="M23 9v2h-2v7a3 3 0 01-3 3h-4v-6h-4v6H6a3 3 0 01-3-3v-7H1V9l11-7 5 3.18V2h3v5.09z"></path>
-                      </svg>
+                    <div className="">
+                      <div className="mt-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 30 30"
+                          data-supported-dps="24x24"
+                          fill="currentColor"
+                          className="mercado-match align-bottom"
+                          width="30px"
+                          height="30px"
+                          focusable="false"
+                        >
+                          <path d="M23 9v2h-2v7a3 3 0 01-3 3h-4v-6h-4v6H6a3 3 0 01-3-3v-7H1V9l11-7 5 3.18V2h3v5.09z"></path>
+                        </svg>
+                      </div>
+                      <h6 style={{ fontSize: "12px" }}>home</h6>
                     </div>
-                    <h6 style={{ fontSize: "12px" }}>home</h6>
-                  </div>
                 </Nav.Link>
+                  {/* </Link> */}
                 <Nav.Link href="#action2" style={{ marginLeft: "15px" }}>
                   <div className="position-relative mt-3">
                     <div>

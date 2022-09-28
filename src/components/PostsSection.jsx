@@ -65,8 +65,9 @@ const PostsSection = () => {
         currentUser !== null && (
           <>
             <Button
-              variant="light"
-              style={{ background: "none", border: "none" }}
+              variant="secondary"
+            //   style={{ background: "none", border: "none" }}
+                className={onMyPosts ? "my-2" : ""}
               onClick={lookAtMyPosts}
             >
               {onMyPosts ? "All Posts" : "My Posts"}

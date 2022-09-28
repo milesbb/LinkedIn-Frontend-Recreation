@@ -45,7 +45,7 @@ const PostItem = ({ post, onMyPosts }) => {
           <Button
             variant="light"
             className="w-25"
-            style={{ fontSize: "0.8rem" }}
+            style={{ fontSize: "0.8rem", borderRadius: "5px 0px 0px 5px" }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@ const PostItem = ({ post, onMyPosts }) => {
           <Button
             variant="light"
             className="w-25"
-            style={{ fontSize: "0.8rem" }}
+            style={{ fontSize: "0.8rem", borderRadius: "0" }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ const PostItem = ({ post, onMyPosts }) => {
           <Button
             variant="light"
             className="w-25"
-            style={{ fontSize: "0.8rem" }}
+            style={{ fontSize: "0.8rem", borderRadius: "0" }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +100,7 @@ const PostItem = ({ post, onMyPosts }) => {
           <Button
             variant="light"
             className="w-25"
-            style={{ fontSize: "0.8rem" }}
+            style={{ fontSize: "0.8rem", borderRadius: "0px 5px 5px 0px" }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
