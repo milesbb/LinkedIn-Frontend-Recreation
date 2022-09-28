@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../redux/actions/getPosts";
 import { handlePosts } from "../redux/actions/handlePosts";
 
-const WritePostModal = ({ show, handleClose, purpose, postId }) => {
+const WritePostModal = ({ show, handleClose, purpose, data }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => {
     return state.loadedProfiles.currentUser;
@@ -27,17 +27,25 @@ const WritePostModal = ({ show, handleClose, purpose, postId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const textForEdit = newPost ? newPost : data.text
+
     const editData = {
-      text: newPost,
+      text: textForEdit,
     };
 
     console.log(editData);
 
     const methodString = purpose === "add" ? "POST" : "PUT";
 
-    dispatch(
-      handlePosts(methodString, "", editData)
-    );
+    if (methodString === "POST") {
+        dispatch(
+            handlePosts(methodString, "", editData)
+          );
+    } else {
+        dispatch(
+            handlePosts(methodString, data._id, editData)
+          );
+    }
 
     dispatch(getPosts(""));
     console.log("FORM SUBMITTED");

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import EditExpModal from "./EditExpModal";
 import EditModal from "./EditModal";
+import WritePostModal from "./WritePostModal";
 
 const EditButton = ({purpose, id, userId, data}) => {
   const [show, setShow] = useState(false);
@@ -26,6 +27,7 @@ const EditButton = ({purpose, id, userId, data}) => {
       </Button>
       {purpose === "profile" && <EditModal show={show} handleClose={handleClose} />}
       {purpose === "exp" && <EditExpModal show={show} handleClose={handleClose} id={id} userId={userId} data={data}/>}
+      {purpose === "editPost" && <WritePostModal show={show} handleClose={handleClose} data={data} purpose="edit" />}
     </div>
   );
 };

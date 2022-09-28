@@ -119,3 +119,5 @@ const PostsSection = () => {
 };
 
 export default PostsSection;
+
+// TEMP HOME <EditButton purpose="editPost" data={post} />

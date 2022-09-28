@@ -1,6 +1,9 @@
 import { useSelector } from "react-redux";
+import EditButton from "./EditButton";
 
-const PostItem = ({post}) => {
+const PostItem = ({post, onMyPosts}) => {
+
+
   return (
     <div
       style={{
@@ -14,6 +17,7 @@ const PostItem = ({post}) => {
         {/* the post is passed as props to this component as an object, check discord for how the response is returned */}
         {/* EXAMPLES: post.text, post.user.name, post.user.title */}
       <p>Test display text: {post.text}</p>
+      
       {/* TEMPLATE END */}
     </div>
   );
