@@ -46,6 +46,7 @@ const PostsSection = () => {
     getPostsData();
   }, []);
 
+  
   useEffect(() => {
     if (postsLoading) {
       getPostsData();
