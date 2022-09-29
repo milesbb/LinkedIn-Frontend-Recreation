@@ -1,22 +1,21 @@
-import Button from "react-bootstrap/Button";
-import Col, { Image, NavLink } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
+import {
+  Button,
+  Container,
+  Form,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Image,
+  InputGroup,
+} from "react-bootstrap";
 import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Loading from "./Loading";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import SearchReseult from "./SearchReseult";
-import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
-const NavFunction = () => {
-  const [query, setQuery] = useState("");
-
+const NewNavBar = () => {
   const currentUser = useSelector((state) => {
     return state.loadedProfiles.currentUser;
   });
@@ -26,14 +25,15 @@ const NavFunction = () => {
   const errorOccurred = useSelector((state) => {
     return state.loadedProfiles.errorProfile;
   });
-
+  const [query, setQuery] = useState("");
   return (
-    <div>
+    <Navbar bg="light" expand="lg" style={{ minHeight: "8vh" }}>
       {loading && <Loading />}
       {!loading && errorOccurred && <div></div>}
       {!loading && !errorOccurred && currentUser !== null && (
-        <Navbar bg="light" expand="lg" style={{ minHeight: "8vh" }}>
-          <Navbar.Brand>
+        <Container fluid>
+          <Navbar.Brand href="#">
+            {" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -47,11 +47,8 @@ const NavFunction = () => {
               <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
             </svg>
           </Navbar.Brand>
-
-          <Navbar.Collapse
-            id="navbarScroll"
-            className="justify-content-between"
-          >
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
             <Form
               style={{
                 borderRadius: 1,
@@ -85,11 +82,14 @@ const NavFunction = () => {
               </Form.Group>
             </Form>
             <Nav
-              className="me-auto my-2 my-lg-0"
-              //   style={{ maxHeight: "100px", marginLeft: 0 }}
+              className="ml-auto my-2 my-lg-0 d-flex flex-row justify-content-around"
+              style={{ maxHeight: "70px" }}
               navbarScroll
             >
-              <Nav.Link style={{ width: "6vw" }} className="mt-2">
+              <Nav.Link
+                style={{ width: "6vw" }}
+                className="mt-2 d-inline-block"
+              >
                 <div style={{ lineHeight: "0.5rem" }}>
                   <Link to="/" className="nav-link">
                     <svg
@@ -109,7 +109,10 @@ const NavFunction = () => {
                   </Link>
                 </div>
               </Nav.Link>
-              <Nav.Link style={{ width: "6vw" }} className="mt-2">
+              <Nav.Link
+                style={{ width: "6vw" }}
+                className="mt-2 d-inline-block"
+              >
                 <div style={{ lineHeight: "0.5rem" }}>
                   <Link to="/" className="nav-link">
                     <svg
@@ -128,7 +131,10 @@ const NavFunction = () => {
                   </Link>
                 </div>
               </Nav.Link>
-              <Nav.Link style={{ width: "6vw" }} className="mt-2">
+              <Nav.Link
+                style={{ width: "6vw" }}
+                className="mt-2 d-inline-block"
+              >
                 <div style={{ lineHeight: "0.5rem" }}>
                   <Link to="/" className="nav-link">
                     <svg
@@ -147,7 +153,10 @@ const NavFunction = () => {
                   </Link>
                 </div>
               </Nav.Link>
-              <Nav.Link style={{ width: "6vw" }} className="mt-2">
+              <Nav.Link
+                style={{ width: "6vw" }}
+                className="mt-2 d-inline-block"
+              >
                 <div style={{ lineHeight: "0.5rem" }}>
                   <Link to="/" className="nav-link">
                     <svg
@@ -166,7 +175,10 @@ const NavFunction = () => {
                   </Link>
                 </div>
               </Nav.Link>
-              <Nav.Link style={{ width: "6vw" }} className="mt-2">
+              <Nav.Link
+                style={{ width: "6vw" }}
+                className="mt-2 d-inline-block"
+              >
                 <div style={{ lineHeight: "0.5rem" }}>
                   <Link to="/" className="nav-link">
                     <svg
@@ -188,28 +200,29 @@ const NavFunction = () => {
 
               <NavDropdown
                 style={{ width: "6vw" }}
-                    className="mt-3"
+                className="mt-3 d-inline-block"
                 title={
-                 
-                    <div style={{ lineHeight: "0.6rem" }}>
-                      <img
-                        style={{
-                          borderRadius: 12,
-                          width: "24px",
-                          height: "24px",
-                        }}
-                        src={currentUser.image}
-                        alt="profile pic"
-                      />
-                      <div>
-                        <span style={{ fontSize: "12px" }}>Me</span>
-                      </div>
+                  <div style={{ lineHeight: "0.6rem" }}>
+                    <img
+                      style={{
+                        borderRadius: 12,
+                        width: "24px",
+                        height: "24px",
+                      }}
+                      src={currentUser.image}
+                      alt="profile pic"
+                    />
+                    <div>
+                      <span style={{ fontSize: "12px" }}>Me</span>
                     </div>
-                  
+                  </div>
                 }
                 id="navbarScrollingDropdown"
               >
-                <NavDropdown.Item className="text-dark" style={{PointerEvent: "none"}}>
+                <NavDropdown.Item
+                  className="text-dark "
+                  style={{ PointerEvent: "none"}}
+                >
                   <div className="d-flex">
                     <Image
                       className="ml-3 mt-2"
@@ -293,7 +306,10 @@ const NavFunction = () => {
                 </NavDropdown.Item>
               </NavDropdown>
 
-              <Nav.Link style={{ width: "6vw" }} className="mt-2">
+              <Nav.Link
+                style={{ width: "6vw" }}
+                className="mt-2 d-inline-block"
+              >
                 <div style={{ lineHeight: "0.6rem" }}>
                   <Link to="/" className="nav-link">
                     <svg
@@ -322,16 +338,16 @@ const NavFunction = () => {
                   fontSize: "12px",
                   width: "6rem",
                 }}
-                className="text-center mr-5 mt-3"
+                className="text-center mr-5 mt-3 d-inline-block"
               >
                 Try Premium for free
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
-        </Navbar>
+        </Container>
       )}
-    </div>
+    </Navbar>
   );
 };
 
-export default NavFunction;
+export default NewNavBar;

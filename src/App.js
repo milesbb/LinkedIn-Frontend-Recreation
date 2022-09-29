@@ -4,13 +4,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProfilePage from "./components/ProfilePage";
 import PostsPage from "./components/PostsPage";
 import NavFunction from "./components/Navbar";
+import NewNavBar from "./components/NewNavBar";
 
 function App() {
   return (
     <div className="App">
       
       <BrowserRouter>
-      <NavFunction />
+      {/* <NavFunction /> */}
+      <NewNavBar/>
         <Routes>
           <Route path="/" element={<PostsPage />} />
           <Route path="/profiles/me" element={<ProfilePage />} />
