@@ -50,11 +50,16 @@ export const handlePosts = (type, postId, data, imgData) => {
       const chosenConfig = type === "DELETE" ? deleteConfig : postPutConfig;
 
       let response = await fetch(fetchURL, chosenConfig);
+      
+      let responseInfo = await response.json()
+      console.log(responseInfo)
+
+      const relevantPostId = type === "POST" ? responseInfo._id : postId
 
       if (response.ok) {
         if (imgData !== null) {
           let imgResponse = await fetch(
-            "https://striveschool-api.herokuapp.com/api/posts/" + postId,
+            "https://striveschool-api.herokuapp.com/api/posts/" + relevantPostId,
             {
               method: "POST",
               body: imgData,

@@ -47,7 +47,7 @@ const WritePostModal = ({ show, handleClose, purpose, data }) => {
     const methodString = purpose === "add" ? "POST" : "PUT";
 
     if (methodString === "POST") {
-      dispatch(handlePosts(methodString, "", editData, null));
+      dispatch(handlePosts(methodString, "", editData, finalImgData));
     } else {
       dispatch(handlePosts(methodString, data._id, editData, finalImgData));
     }
@@ -112,19 +112,18 @@ const WritePostModal = ({ show, handleClose, purpose, data }) => {
               }}
               style={{ border: "none" }}
             />
-            {purpose !== "add" &&
-              <div>
-                <p className="mt-3">Image Upload</p>
-                <Form.File
-                  required
-                  name="file"
-                  label="File"
-                  onChange={(e) => {
-                    setSelectedFile(e.target.files[0]);
-                  }}
-                />
-              </div>
-            }
+
+            <div>
+              <p className="mt-3">Image Upload</p>
+              <Form.File
+                required
+                name="file"
+                label="File"
+                onChange={(e) => {
+                  setSelectedFile(e.target.files[0]);
+                }}
+              />
+            </div>
           </Form.Group>
           <Modal.Footer>
             <Button
