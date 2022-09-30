@@ -32,7 +32,7 @@ const SearchReseult = ({ query }) => {
         position: "absolute",
         zIndex: "2",
         height: "400px",
-        overflow: "hidden"
+        overflow: "scroll"
       }}
       
     >
