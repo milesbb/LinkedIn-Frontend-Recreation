@@ -8,6 +8,7 @@ import Bio from "./Bio";
 
 import ExperiencesSection from "./ExperiencesSection";
 import Loading from "./Loading";
+import ProfileFooter from "./ProfileFooter";
 import SideProfiles from "./SideProfiles";
 import Warning from "./Warning";
 
@@ -112,6 +113,7 @@ const ProfilePage = () => {
           </Row>
         </Container>
       )}
+      <ProfileFooter />
     </div>
   );
 };

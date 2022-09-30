@@ -1,4 +1,4 @@
-import { Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import EditButton from "./EditButton";
 
 const Bio = ({ profileData, isOnMyProfile }) => {
@@ -35,8 +35,27 @@ const Bio = ({ profileData, isOnMyProfile }) => {
       <div className="mt-5 ml-5 d-flex w-75">
         <div className="mr-auto">
           <h1>{profileData.name + " " + profileData.surname}</h1>
-          <h3>{profileData.title}</h3>
-          <p>{profileData.area}</p>
+          <h3 style={{ fontSize: "1.3rem" }}>{profileData.title}</h3>
+          <p>
+            {profileData.area}{" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-dot"
+              viewBox="0 0 16 16"
+            >
+              <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+            </svg>
+            <a href="" className="font-weight-bold">Contact Info</a>
+          </p>
+          <p><a href="" className="font-weight-bold">{Math.floor(Math.random() * 100).toString() + " Connections"}</a></p>
+          <div className="text-lg-left text-center">
+            <Button variant="primary" className="font-weight-bold mb-4 mr-2" style={{borderRadius: "10rem"}}>{isOnMyProfile? "Open to" : "Connect"}</Button>
+            <Button variant="light" className="font-weight-bold mb-4 mr-2" style={{borderRadius: "10rem", border: "solid 1px #0b66c2", color: "#0b66c2"}}>{isOnMyProfile? "Add Profile Section" : "Message"}</Button>
+            <Button variant="light" className="font-weight-bold mb-4" style={{borderRadius: "10rem", border: "solid 1px gray" , color: "gray"}}>More</Button>
+          </div>
         </div>
         {isOnMyProfile && <EditButton purpose="profile" />}
       </div>
