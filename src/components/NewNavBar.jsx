@@ -56,6 +56,7 @@ const NewNavBar = () => {
                 height: "40px",
               }}
               inline
+            className="position-"
             >
               <Form.Group>
                 <InputGroup>
@@ -83,7 +84,7 @@ const NewNavBar = () => {
             </Form>
             <Nav
               className="ml-auto my-2 my-lg-0 d-flex flex-row justify-content-around"
-              style={{ maxHeight: "70px" }}
+              style={{ minHeight: "70px" }}
               navbarScroll
             >
               <Nav.Link
@@ -220,7 +221,7 @@ const NewNavBar = () => {
                 id="navbarScrollingDropdown"
               >
                 <NavDropdown.Item
-                  className="text-dark "
+                  className="text-dark p-0 "
                   style={{ PointerEvent: "none"}}
                 >
                   <div className="d-flex">
