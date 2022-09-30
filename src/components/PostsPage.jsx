@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { getProfile, ON_MY_PROFILE } from "../redux/actions/getProfileInfo";
 import AddPostSection from "./AddPostSection";
 import Loading from "./Loading";
+import MiniFooter from "./MiniFooter";
 import PostsBio from "./PostsBio";
 import PostsSection from "./PostsSection";
 import SideProfiles from "./SideProfiles";
@@ -96,6 +97,7 @@ const PostsPage = () => {
           </Col>
           <Col lg={3} className="d-lg-block d-none">
             <SideProfiles />
+            <MiniFooter />
           </Col>
         </Row>
       </Container>}

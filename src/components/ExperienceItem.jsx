@@ -44,9 +44,9 @@ const ExperienceItem = ({ exp, itemKey, userId }) => {
 
           <p>{exp.description}</p>
         </div>
-        <div className="position-absolute" style={{ right: "1rem" }}>
+        <div className="position-absolute" style={{ right: "1.4rem" }}>
           {isOnMyProfile && (
-            <div>
+            <div className="d-flex text-right">
               <EditButton
                 purpose="exp"
                 data={exp}
